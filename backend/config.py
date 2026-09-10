@@ -14,7 +14,7 @@ load_dotenv()
 # =====================================================
 
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development").lower()
-DEFAULT_DEV_SECRET = "ai_devsecops_secure_jwt_secret_key_2026_prod_ready"
+DEFAULT_DEV_SECRET = "ai_devsecops_secure_jwt_secret_key_2026_prod_ready"  # nosec B105
 
 SECRET_KEY = os.getenv("SECRET_KEY", DEFAULT_DEV_SECRET)
 if ENVIRONMENT == "production" and (not SECRET_KEY or SECRET_KEY == DEFAULT_DEV_SECRET):

@@ -13,7 +13,8 @@ login_data = {
 try:
     response = requests.post(
         "http://127.0.0.1:8000/api/v1/auth/login",
-        data=login_data
+        data=login_data,
+        timeout=10
     )
     print(f"Status Code: {response.status_code}")
     print(f"Response: {json.dumps(response.json(), indent=2)}")
@@ -30,7 +31,8 @@ login_data_wrong = {
 try:
     response = requests.post(
         "http://127.0.0.1:8000/api/v1/auth/login",
-        data=login_data_wrong
+        data=login_data_wrong,
+        timeout=10
     )
     print(f"Status Code: {response.status_code}")
     print(f"Response: {json.dumps(response.json(), indent=2)}")
@@ -54,7 +56,8 @@ try:
         data=form_data,
         headers={
             "Content-Type": "application/x-www-form-urlencoded"
-        }
+        },
+        timeout=10
     )
     print(f"Status Code: {response.status_code}")
     print(f"Response: {json.dumps(response.json(), indent=2)}")

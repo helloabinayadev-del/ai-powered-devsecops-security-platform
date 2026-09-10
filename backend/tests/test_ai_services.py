@@ -37,11 +37,11 @@ def test_risk_score_for_scan(client, auth_token, sample_scan):
         headers={"Authorization": f"Bearer {auth_token}"}
     )
     
-    assert response.status_code == 200
+    assert response.status_code == 200  # nosec B101
     data = response.json()
-    assert "score" in data
-    assert "risk_level" in data
-    assert 0 <= data["score"] <= 100
+    assert "score" in data  # nosec B101
+    assert "risk_level" in data  # nosec B101
+    assert 0 <= data["score"] <= 100  # nosec B101
 
 
 def test_overall_risk_score(client, auth_token):
@@ -51,10 +51,10 @@ def test_overall_risk_score(client, auth_token):
         headers={"Authorization": f"Bearer {auth_token}"}
     )
     
-    assert response.status_code == 200
+    assert response.status_code == 200  # nosec B101
     data = response.json()
-    assert "score" in data
-    assert "risk_level" in data
+    assert "score" in data  # nosec B101
+    assert "risk_level" in data  # nosec B101
 
 
 def test_risk_history(client, auth_token):
@@ -64,10 +64,10 @@ def test_risk_history(client, auth_token):
         headers={"Authorization": f"Bearer {auth_token}"}
     )
     
-    assert response.status_code == 200
+    assert response.status_code == 200  # nosec B101
     data = response.json()
-    assert "history" in data
-    assert "total" in data
+    assert "history" in data  # nosec B101
+    assert "total" in data  # nosec B101
 
 
 def test_security_assistant_chat(client, auth_token):
@@ -81,10 +81,10 @@ def test_security_assistant_chat(client, auth_token):
         }
     )
     
-    assert response.status_code == 200
+    assert response.status_code == 200  # nosec B101
     data = response.json()
-    assert "answer" in data
-    assert "session_id" in data
+    assert "answer" in data  # nosec B101
+    assert "session_id" in data  # nosec B101
 
 
 def test_security_assistant_rate_limit(client, auth_token):
@@ -102,8 +102,8 @@ def test_security_assistant_rate_limit(client, auth_token):
         )
     
     # Last request should be rate limited
-    assert response.status_code == 429
-    assert "rate limit" in response.json()["detail"].lower()
+    assert response.status_code == 429  # nosec B101
+    assert "rate limit" in response.json()["detail"].lower()  # nosec B101
 
 
 def test_invalid_scan_id(client, auth_token):
@@ -113,4 +113,4 @@ def test_invalid_scan_id(client, auth_token):
         headers={"Authorization": f"Bearer {auth_token}"}
     )
     
-    assert response.status_code == 404
+    assert response.status_code == 404  # nosec B101

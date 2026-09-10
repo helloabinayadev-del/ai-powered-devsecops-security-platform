@@ -41,16 +41,16 @@ def test_create_user(db):
     """Test user creation."""
     user = User(
         username="testuser",
-        password="hashedpassword",
+        password="hashedpassword",  # nosec B106
         role="user"
     )
     db.add(user)
     db.commit()
     
     retrieved_user = db.query(User).filter(User.username == "testuser").first()
-    assert retrieved_user is not None
-    assert retrieved_user.username == "testuser"
-    assert retrieved_user.role == "user"
+    assert retrieved_user is not None  # nosec B101
+    assert retrieved_user.username == "testuser"  # nosec B101
+    assert retrieved_user.role == "user"  # nosec B101
 
 
 def test_create_scan_history(db):
@@ -66,9 +66,9 @@ def test_create_scan_history(db):
     db.commit()
     
     retrieved_scan = db.query(ScanHistory).filter(ScanHistory.filename == "test.py").first()
-    assert retrieved_scan is not None
-    assert retrieved_scan.status == "Completed"
-    assert retrieved_scan.risk_level == "Low"
+    assert retrieved_scan is not None  # nosec B101
+    assert retrieved_scan.status == "Completed"  # nosec B101
+    assert retrieved_scan.risk_level == "Low"  # nosec B101
 
 
 def test_create_ai_analysis(db):
@@ -96,9 +96,9 @@ def test_create_ai_analysis(db):
     db.commit()
     
     retrieved_analysis = db.query(AIAnalysis).filter(AIAnalysis.scan_id == scan.id).first()
-    assert retrieved_analysis is not None
-    assert retrieved_analysis.vulnerability_id == "B101"
-    assert retrieved_analysis.risk_score == 5.0
+    assert retrieved_analysis is not None  # nosec B101
+    assert retrieved_analysis.vulnerability_id == "B101"  # nosec B101
+    assert retrieved_analysis.risk_score == 5.0  # nosec B101
 
 
 def test_create_risk_history(db):
@@ -125,15 +125,15 @@ def test_create_risk_history(db):
     db.commit()
     
     retrieved_risk = db.query(RiskHistory).filter(RiskHistory.scan_id == scan.id).first()
-    assert retrieved_risk is not None
-    assert retrieved_risk.score == 85.0
-    assert retrieved_risk.risk_level == "Low"
+    assert retrieved_risk is not None  # nosec B101
+    assert retrieved_risk.score == 85.0  # nosec B101
+    assert retrieved_risk.risk_level == "Low"  # nosec B101
 
 
 def test_user_unique_constraint(db):
     """Test that username must be unique."""
-    user1 = User(username="testuser", password="pass1", role="user")
-    user2 = User(username="testuser", password="pass2", role="user")
+    user1 = User(username="testuser", password="pass1", role="user")  # nosec B106
+    user2 = User(username="testuser", password="pass2", role="user")  # nosec B106
     
     db.add(user1)
     db.commit()

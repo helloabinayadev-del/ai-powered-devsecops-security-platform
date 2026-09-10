@@ -15,11 +15,11 @@ def test_upload_success(client, auth_headers):
         files={"file": ("test.py", test_content, "text/plain")}
     )
     
-    assert response.status_code == 200
+    assert response.status_code == 200  # nosec B101
     data = response.json()
-    assert data["success"] is True
-    assert "filename" in data
-    assert "status" in data
+    assert data["success"] is True  # nosec B101
+    assert "filename" in data  # nosec B101
+    assert "status" in data  # nosec B101
 
 
 def test_upload_invalid_file_type(client, auth_headers):
@@ -32,10 +32,10 @@ def test_upload_invalid_file_type(client, auth_headers):
         files={"file": ("test.txt", test_content, "text/plain")}
     )
     
-    assert response.status_code == 200
+    assert response.status_code == 200  # nosec B101
     data = response.json()
-    assert data["success"] is False
-    assert "Only Python (.py) files are allowed" in data["message"]
+    assert data["success"] is False  # nosec B101
+    assert "Only Python (.py) files are allowed" in data["message"]  # nosec B101
 
 
 def test_upload_empty_file(client, auth_headers):
@@ -46,10 +46,10 @@ def test_upload_empty_file(client, auth_headers):
         files={"file": ("empty.py", b"", "text/plain")}
     )
     
-    assert response.status_code == 200
+    assert response.status_code == 200  # nosec B101
     data = response.json()
-    assert data["success"] is False
-    assert "empty" in data["message"].lower()
+    assert data["success"] is False  # nosec B101
+    assert "empty" in data["message"].lower()  # nosec B101
 
 
 def test_upload_unauthorized(client):
@@ -61,7 +61,7 @@ def test_upload_unauthorized(client):
         files={"file": ("test.py", test_content, "text/plain")}
     )
     
-    assert response.status_code == 401
+    assert response.status_code == 401  # nosec B101
 
 
 def test_upload_rate_limit(client, auth_headers, monkeypatch):
@@ -81,5 +81,5 @@ def test_upload_rate_limit(client, auth_headers, monkeypatch):
         )
     
     # Last request should be rate limited
-    assert response.status_code == 429
-    assert "rate limit" in response.json()["detail"].lower()
+    assert response.status_code == 429  # nosec B101
+    assert "rate limit" in response.json()["detail"].lower()  # nosec B101

@@ -11,29 +11,29 @@ def test_report_downloads_include_ai_report(client, auth_headers, sample_scan):
     generated = client.get(
         f"/api/v1/ai/reports/{sample_scan.id}", headers=auth_headers
     )
-    assert generated.status_code == 200
-    assert generated.json()["scan_id"] == sample_scan.id
+    assert generated.status_code == 200  # nosec B101
+    assert generated.json()["scan_id"] == sample_scan.id  # nosec B101
 
     json_response = client.get(
         f"/api/v1/reports/json/{sample_scan.report_name}", headers=auth_headers
     )
-    assert json_response.status_code == 200
-    assert json_response.headers["content-type"].startswith("application/json")
-    assert json_response.json()["ai_report"]["scan_id"] == sample_scan.id
+    assert json_response.status_code == 200  # nosec B101
+    assert json_response.headers["content-type"].startswith("application/json")  # nosec B101
+    assert json_response.json()["ai_report"]["scan_id"] == sample_scan.id  # nosec B101
 
     text_response = client.get(
         f"/api/v1/reports/text/{sample_scan.report_name}", headers=auth_headers
     )
-    assert text_response.status_code == 200
-    assert text_response.headers["content-type"].startswith("text/plain")
-    assert "AI EXECUTIVE SUMMARY" in text_response.text
+    assert text_response.status_code == 200  # nosec B101
+    assert text_response.headers["content-type"].startswith("text/plain")  # nosec B101
+    assert "AI EXECUTIVE SUMMARY" in text_response.text  # nosec B101
 
     pdf_response = client.get(
         f"/api/v1/reports/pdf/{sample_scan.report_name}", headers=auth_headers
     )
-    assert pdf_response.status_code == 200
-    assert pdf_response.headers["content-type"].startswith("application/pdf")
-    assert pdf_response.content.startswith(b"%PDF")
+    assert pdf_response.status_code == 200  # nosec B101
+    assert pdf_response.headers["content-type"].startswith("application/pdf")  # nosec B101
+    assert pdf_response.content.startswith(b"%PDF")  # nosec B101
 
 
 def test_upload_generates_and_exports_ai_report(client, auth_headers, monkeypatch):
@@ -60,12 +60,12 @@ def test_upload_generates_and_exports_ai_report(client, auth_headers, monkeypatc
         headers=auth_headers,
         files={"file": ("workflow.py", "print('safe')", "text/x-python")},
     )
-    assert upload.status_code == 200
-    assert upload.json()["success"] is True
+    assert upload.status_code == 200  # nosec B101
+    assert upload.json()["success"] is True  # nosec B101
 
     listed = client.get("/api/v1/files/", headers=auth_headers)
     scan = next(item for item in listed.json()["files"] if item["report_name"] == report_name)
-    assert scan["id"] > 0
+    assert scan["id"] > 0  # nosec B101
 
     for report_type, expected_content_type in (
         ("json", "application/json"),
@@ -75,5 +75,5 @@ def test_upload_generates_and_exports_ai_report(client, auth_headers, monkeypatc
         response = client.get(
             f"/api/v1/reports/{report_type}/{report_name}", headers=auth_headers
         )
-        assert response.status_code == 200
-        assert response.headers["content-type"].startswith(expected_content_type)
+        assert response.status_code == 200  # nosec B101
+        assert response.headers["content-type"].startswith(expected_content_type)  # nosec B101

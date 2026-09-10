@@ -14,6 +14,7 @@ from reportlab.lib.pagesizes import letter
 from backend.auth.roles import admin_required
 from backend.auth.dependencies import get_current_user
 from backend.config import REPORTS_FOLDER, UPLOAD_FOLDER
+from backend.logger import logger
 from backend.database.database import get_db
 from backend.database.models import ScanHistory, AIAnalysis, RiskHistory
 from sqlalchemy.orm import Session
@@ -203,8 +204,8 @@ def download_text(
                 filename=txt_name,
                 media_type="text/plain; charset=utf-8"
             )
-        except Exception:
-            pass
+        except Exception as exc:
+            logger.warning("Failed to generate TXT report on the fly: %s", exc)
 
     raise HTTPException(
         status_code=404,

@@ -8,10 +8,10 @@ class TestSecurityAssistant:
         assistant = SecurityAssistant(db_session)
         result = assistant.chat("How do I fix SQL Injection?")
 
-        assert result["answer"]
-        assert len(result["recommendations"]) >= 2
-        assert result["session_id"]
-        assert result["analysis_mode"] == "knowledge_base"
+        assert result["answer"]  # nosec B101
+        assert len(result["recommendations"]) >= 2  # nosec B101
+        assert result["session_id"]  # nosec B101
+        assert result["analysis_mode"] == "knowledge_base"  # nosec B101
 
     def test_chat_empty_question(self, db_session):
         assistant = SecurityAssistant(db_session)
@@ -28,8 +28,8 @@ class TestSecurityAssistant:
         first = assistant.chat("How can I improve security?", session_id="test-session")
         second = assistant.chat("Tell me more", session_id="test-session")
 
-        assert first["session_id"] == "test-session"
-        assert second["session_id"] == "test-session"
+        assert first["session_id"] == "test-session"  # nosec B101
+        assert second["session_id"] == "test-session"  # nosec B101
 
     def test_chat_with_scan_context(self, db_session, sample_scan):
         assistant = SecurityAssistant(db_session)
@@ -37,9 +37,9 @@ class TestSecurityAssistant:
             "What vulnerabilities were found?",
             scan_id=sample_scan.id,
         )
-        assert result["answer"]
-        assert "vulnerable.py" in result["answer"] or "finding" in result["answer"].lower()
-        assert result["context_used"] == f"scan:{sample_scan.id}"
+        assert result["answer"]  # nosec B101
+        assert "vulnerable.py" in result["answer"] or "finding" in result["answer"].lower()  # nosec B101
+        assert result["context_used"] == f"scan:{sample_scan.id}"  # nosec B101
 
     def test_chat_invalid_scan(self, db_session):
         assistant = SecurityAssistant(db_session)
@@ -49,5 +49,5 @@ class TestSecurityAssistant:
     def test_chat_general_question(self, db_session):
         assistant = SecurityAssistant(db_session)
         result = assistant.chat("What is DevSecOps?")
-        assert result["answer"]
-        assert result["context_used"] == "general"
+        assert result["answer"]  # nosec B101
+        assert result["context_used"] == "general"  # nosec B101

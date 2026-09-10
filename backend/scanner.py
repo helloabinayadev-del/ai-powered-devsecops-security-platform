@@ -1,6 +1,7 @@
 import os
+import sys
 import json
-import subprocess
+import subprocess  # nosec B404
 from datetime import datetime
 
 from backend.config import REPORTS_FOLDER, HISTORY_FILE
@@ -31,8 +32,10 @@ def scan_python_file(file_path: str):
 
     with open(txt_report, "w", encoding="utf-8") as report:
 
-        subprocess.run(
+        subprocess.run(  # nosec B603
             [
+                sys.executable,
+                "-m",
                 "bandit",
                 "-r",
                 file_path
@@ -47,8 +50,10 @@ def scan_python_file(file_path: str):
     # Run Bandit JSON Report
     # ==============================
 
-    subprocess.run(
+    subprocess.run(  # nosec B603
         [
+            sys.executable,
+            "-m",
             "bandit",
             "-r",
             file_path,

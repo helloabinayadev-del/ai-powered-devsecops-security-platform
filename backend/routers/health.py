@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from datetime import datetime
 import platform
 import os
+import sys
 import psutil
 import time
 from sqlalchemy import text
@@ -66,8 +67,8 @@ def check_ai_service():
 def scanner_available():
     """Check if Bandit scanner is available."""
     try:
-        import subprocess
-        result = subprocess.run(["bandit", "--version"], capture_output=True, timeout=5)
+        import subprocess  # nosec B404
+        result = subprocess.run([sys.executable, "-m", "bandit", "--version"], capture_output=True, timeout=5)  # nosec B603
         return result.returncode == 0
     except Exception:
         return False

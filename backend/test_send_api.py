@@ -12,7 +12,8 @@ login_data = {
 try:
     login_response = requests.post(
         "http://127.0.0.1:8000/api/v1/auth/login",
-        data=login_data
+        data=login_data,
+        timeout=10
     )
     print(f"Login Status Code: {login_response.status_code}")
     if login_response.status_code == 200:
@@ -33,7 +34,8 @@ try:
         send_response = requests.post(
             "http://127.0.0.1:8000/api/v1/email/send",
             params=send_data,
-            headers=headers
+            headers=headers,
+            timeout=10
         )
         print(f"\nSend Email Status Code: {send_response.status_code}")
         print(f"Response: {json.dumps(send_response.json(), indent=2)}")
