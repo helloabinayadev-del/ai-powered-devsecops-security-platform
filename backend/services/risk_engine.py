@@ -3,7 +3,7 @@ Intelligent Risk Scoring Engine.
 Calculates security scores from vulnerability data and scan history trends.
 """
 
-from typing import Any
+from typing import Any, Optional
 
 from sqlalchemy.orm import Session
 
