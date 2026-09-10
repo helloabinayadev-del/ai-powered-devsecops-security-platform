@@ -1,0 +1,7 @@
+{
+  "name": "ai-powered-devsecops-security-platform",
+  "dependencies": {
+    "react-icons": "^5.7.0",
+    "recharts": "^3.10.0"
+  }
+}

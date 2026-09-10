@@ -1,0 +1,45 @@
+.risk-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:6px 14px;
+
+    border-radius:25px;
+
+    font-size:14px;
+
+    font-weight:600;
+}
+
+.risk-icon{
+    font-size:15px;
+}
+
+/* Safe */
+
+.badge-safe{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+/* Low */
+
+.badge-low{
+    background:#fef9c3;
+    color:#ca8a04;
+}
+
+/* Medium */
+
+.badge-medium{
+    background:#ffedd5;
+    color:#ea580c;
+}
+
+/* High */
+
+.badge-high{
+    background:#fee2e2;
+    color:#dc2626;
+}

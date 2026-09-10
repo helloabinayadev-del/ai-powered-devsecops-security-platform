@@ -1,0 +1,474 @@
+/* ==========================================
+   Files Page
+========================================== */
+
+.files-container {
+  margin-left: 0;
+  min-height: 100vh;
+  background: var(--bg-primary);
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+/* ==========================================
+   Header
+========================================== */
+
+.files-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.files-header h1 {
+  color: #1f2937;
+  font-size: 32px;
+}
+
+/* ==========================================
+   Refresh Button
+========================================== */
+
+.refresh-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.refresh-btn:hover {
+  background: #1d4ed8;
+}
+
+/* ==========================================
+   Search
+========================================== */
+
+.search-box {
+  width: 100%;
+  padding: 12px 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 15px;
+  margin-bottom: 25px;
+  outline: none;
+}
+
+.search-box:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
+}
+
+/* ==========================================
+   Loading
+========================================== */
+
+.loading {
+  text-align: center;
+  font-size: 20px;
+  color: #2563eb;
+  margin-top: 60px;
+}
+
+/* ==========================================
+   Table Card
+========================================== */
+
+.table-card {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+}
+
+/* ==========================================
+   Table
+========================================== */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #2563eb;
+  color: white;
+}
+
+thead th {
+  padding: 14px;
+  text-align: left;
+}
+
+tbody td {
+  padding: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* ==========================================
+   Risk Badges
+========================================== */
+
+.risk-safe,
+.risk-low,
+.risk-medium,
+.risk-high {
+  padding: 6px 12px;
+  border-radius: 20px;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.risk-safe {
+  background: #16a34a;
+}
+
+.risk-low {
+  background: #3b82f6;
+}
+
+.risk-medium {
+  background: #f59e0b;
+}
+
+.risk-high {
+  background: #ef4444;
+}
+
+/* ==========================================
+   Action Buttons
+========================================== */
+
+.view-btn,
+.download-btn {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: 0.3s;
+}
+
+.view-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.view-btn:hover {
+  background: #1d4ed8;
+}
+
+.download-btn {
+  background: #10b981;
+  color: white;
+}
+
+.download-btn:hover {
+  background: #059669;
+}
+
+/* ==========================================
+   Modern Enterprise Search & Filtering
+========================================== */
+
+.filters-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.enterprise-search-wrapper {
+  position: relative;
+  flex: 1;
+  width: 100%;
+}
+
+.enterprise-search-input {
+  width: 100%;
+  padding: 12px 42px 12px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color, #334155);
+  background: var(--bg-secondary, #111827);
+  color: var(--text-primary, #f8fafc);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.enterprise-search-input::placeholder {
+  color: var(--text-muted, #94a3b8);
+  font-weight: 400;
+}
+
+.enterprise-search-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+  background: var(--bg-card, #1e293b);
+}
+
+.search-clear-btn {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--text-muted, #94a3b8);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.search-clear-btn:hover {
+  color: var(--text-primary, #ffffff);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.filter-select {
+  padding: 12px 16px;
+  border: 1px solid var(--border-color, #334155);
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  background: var(--bg-secondary, #111827);
+  color: var(--text-primary, #f8fafc);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 46px;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+
+/* ==========================================
+   Table Styling
+========================================== */
+
+/* ==========================================
+   Table Styling & Sticky Header
+========================================== */
+
+.table-card {
+  background: var(--bg-card, #1e293b);
+  border: 1px solid var(--border-color, #334155);
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 16px 18px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted, #94a3b8);
+  background: var(--bg-secondary, #111827);
+  border-bottom: 2px solid var(--border-color, #334155);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+thead th:hover {
+  background: var(--bg-card-hover, #273449);
+  color: var(--text-primary, #f8fafc);
+}
+
+thead th svg {
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+tbody td {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border-color, #334155);
+  color: var(--text-secondary, #cbd5e1);
+  font-size: 0.92rem;
+}
+
+tbody tr {
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+tbody tr:hover {
+  background: rgba(59, 130, 246, 0.08);
+}
+
+tbody tr:hover td {
+  color: var(--text-primary, #f8fafc);
+}
+
+/* ==========================================
+   Action Buttons
+========================================== */
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.view-btn {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+}
+
+.ai-btn {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  color: white;
+}
+
+.download-btn {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.delete-btn {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+}
+
+/* ==========================================
+   Pagination Styling
+========================================== */
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+  padding: 12px 18px;
+}
+
+.pagination-btn {
+  padding: 8px 18px;
+  background: var(--bg-secondary, #111827);
+  color: var(--text-primary, #f8fafc);
+  border: 1px solid var(--border-color, #334155);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--text-muted, #94a3b8);
+}
+
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media (max-width: 1024px) {
+
+  .files-container {
+    margin-left: 80px;
+    padding: 20px;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .files-container {
+    margin-left: 0;
+    padding: 15px;
+  }
+
+  .files-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  .view-btn,
+  .download-btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .files-header h1 {
+    font-size: 26px;
+  }
+
+  .table-card {
+    padding: 15px;
+  }
+
+}
