@@ -76,7 +76,7 @@ app = FastAPI(
         "Provides vulnerability scanning (Bandit), AI vulnerability analysis, "
         "security assistant, intelligent risk scoring, and AI report generation."
     ),
-    version="2.0.0",
+    version="1.0.0",
     lifespan=lifespan,
 )
 

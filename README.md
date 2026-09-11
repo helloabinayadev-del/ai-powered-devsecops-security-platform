@@ -1,9 +1,9 @@
 ## AI-Powered DevSecOps Security Platform
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
-![FastAPI](https://img.shields.io/badge/FastAPI-2.0-green)
-![React](https://img.shields.io/badge/React-19.2-blue)
-![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.116.1-green)
+![React](https://img.shields.io/badge/React-19.2.7-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-6.0.2-blue)
 ![Docker](https://img.shields.io/badge/Docker-Enabled-blue)
 ![Bandit](https://img.shields.io/badge/Bandit-Security-orange)
 ![GitHub Actions](https://img.shields.io/badge/CI-CD-success)
@@ -62,21 +62,21 @@ Traditional static security tools generate raw static analysis outputs that requ
 
 ## backend
 - **Python 3.12** - Core language
-- **FastAPI 2.0** - Web framework with async support
-- **SQLAlchemy** - ORM with PostgreSQL/SQLite support
-- **PostgreSQL** - Production database (Docker)
+- **FastAPI 0.116.1** - Web framework with async support
+- **SQLAlchemy 2.0.42** - ORM with PostgreSQL/SQLite support
+- **PostgreSQL** - Production database (Docker / Render)
 - **SQLite** - Development database
-- **Bandit** - Security scanner for Python code
-- **ReportLab** - Professional PDF generation
-- **PyJWT** - JWT authentication with secure token handling
+- **Bandit 1.9.1** - Security scanner for Python code
+- **ReportLab 5.0.0** - Professional PDF generation
+- **python-jose 3.5.0** - JWT authentication with secure token handling
 - **python-dotenv** - Environment configuration
 - **smtplib** - Email service integration
 
 ## Frontend
-- **React 19.2** - UI library with hooks
-- **TypeScript 6.0** - Type safety and better DX
-- **Vite 8.1** - Fast build tool and dev server
-- **React Router 7.18** - Client-side routing
+- **React 19.2.7** - UI library with hooks
+- **TypeScript 6.0.2** - Type safety and better DX
+- **Vite 8.1.1** - Fast build tool and dev server
+- **React Router 7.18.1** - Client-side routing
 - **Axios** - HTTP client with interceptors
 - **Recharts 3.10** - Data visualization charts
 - **React Icons** - Icon library (Font Awesome)
@@ -464,9 +464,8 @@ DATABASE_URL=sqlite:///./ai_devsecops.db
 1. Access Application
    └─ http://localhost (Docker) or http://localhost:5173 (Dev)
 
-2. Login
-   └─ Username: admin
-   └─ Password: admin123
+2. Authentication / Login
+   └─ Log in with provisioned credentials or register a user account
 
 3. Upload Python File
    └─ Navigate to Upload page
@@ -597,7 +596,12 @@ Test coverage includes:
 
 ```bash
 cd frontend
+
+# Development (watch mode)
 npm test
+
+# CI (non-watch mode)
+npx vitest run
 ```
 
 Test coverage includes:
@@ -651,30 +655,36 @@ Test coverage includes:
 
 # Deployment Guide
 
-## Production Deployment
+## Production Cloud Deployment Setup
 
-1. **Environment Variables**
-   - Set all required environment variables
-   - Change default passwords and secret keys
-   - Configure AI API keys if using LLM features
+### 1. Database (Render PostgreSQL / Managed PostgreSQL)
+- Create a managed PostgreSQL instance on Render, Supabase, or AWS RDS.
+- Copy the internal or external connection string provided by the provider.
+- Set `DATABASE_TYPE=postgresql` and `DATABASE_URL=postgresql://<user>:<password>@<host>:<port>/<dbname>`.
 
-2. **Database**
-   - SQLite is included for development
-   - Consider PostgreSQL for production
-   - Backup database regularly
+### 2. Backend Web Service (Render Web Service)
+- Connect repository to Render as a Python Web Service.
+- **Build Command**: `pip install -r requirements.txt`
+- **Start Command**: `uvicorn backend.app:app --host 0.0.0.0 --port 8000`
+- **Environment Variables**:
+  - `DATABASE_TYPE`: `postgresql`
+  - `DATABASE_URL`: Managed PostgreSQL connection string
+  - `SECRET_KEY`: Strong random secret key (e.g. `python -c "import secrets; print(secrets.token_urlsafe(32))"`)
+  - `ENVIRONMENT`: `production`
+  - `ALLOWED_ORIGINS`: Frontend URL (e.g. `https://your-frontend.vercel.app`)
+  - `AI_ENABLED`: `true` or `false`
+  - `BOOTSTRAP_ADMIN_USERNAME`: Admin username for initial bootstrap
+  - `BOOTSTRAP_ADMIN_PASSWORD`: Secure initial password for admin account
 
-3. **Security**
-   - Enable HTTPS in production
-   - Use strong secret keys
-   - Implement rate limiting
-   - Add input validation
-   - Regular security audits
+### 3. Frontend Application (Vercel / Render Static Site)
+- Connect `frontend/` directory to Vercel or Render Static Site.
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Environment Variables**:
+  - `VITE_API_BASE_URL`: Deployed backend URL (e.g. `https://your-backend.onrender.com`)
 
-4. **Scaling**
-   - Use load balancer for frontend
-   - Scale backend horizontally
-   - Add Redis for caching
-   - Implement Celery for background tasks
+### 4. File Storage Note
+- Local file uploads (`uploads/`), generated reports (`reports/`), and runtime logs (`logs/`) are stored on the local filesystem. On ephemeral cloud containers (such as Render Web Services), disk storage resets on service redeployment unless persistent disk storage is attached.
 
 ---
 
@@ -730,7 +740,7 @@ Add screenshots after running the project:
 
 # Project Status
 
-- **Status**: ✅ **Production-Ready & GitHub Ready** (Version 2.0.0)
+- **Status**: ✅ **Deployment-Ready** (Version 1.0.0)
 - **CI/CD Pipeline**: GitHub Actions automated syntax, bandit security, backend pytest, and frontend build tests.
 - **Quality Score**: 9.2/10 evaluated across security, test coverage, UI/UX, and containerization.
 
